@@ -9,3 +9,7 @@ FUNCTIONALITY:
 - Be sure your code is readable and well structured
 - If including a user-interactive feature like a search field, be sure that you appropriately handle error cases
 - Be thoughtful about what type of styling is used (example: font-sizes are not too small or large, colors are not too dark/light to be easily seen, etc.)
+
+References:
+- Main ref: https://www.figma.com/community/file/1210654293667145015
+- 404: https://www.figma.com/community/file/1154693418409191716/404-pages-star-wars-style
