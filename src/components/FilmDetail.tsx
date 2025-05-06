@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import detailsBg from '../assets/backgrounds/details.png';
+import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
+import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
 
 type FilmDetailData = {
     properties: {
@@ -9,8 +11,57 @@ type FilmDetailData = {
         producer: string;
         release_date: string;
         opening_crawl: string;
+        starships: string[];
+        vehicles: string[];
+        planets: string[];
+        characters: string[];
+        species: string[];
     };
 };
+
+const randomColor = () => {
+    const colors = [
+        'bg-gray-900',
+        'bg-neutral-900',
+        'bg-slate-900',
+        'bg-zinc-900',
+        'bg-stone-900',
+        'bg-blue-900',
+        'bg-purple-900',
+        'bg-indigo-900',
+        'bg-emerald-900',
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+};
+
+const icons = [
+    FaJediOrder,
+    FaRobot,
+    FaMeteor,
+    FaRocket,
+    FaDragon,
+    GiPlanetConquest,
+    GiAlienSkull,
+    GiSpaceShuttle,
+  ];
+
+const IconGrid = ({ items }: { items: string[] }) => (
+    <div className="flex flex-wrap gap-4 mt-4">
+      {items.slice(0, 20).map((_, i) => {
+        const Icon = icons[Math.floor(Math.random() * icons.length)];
+        return (
+          <div
+            key={i}
+            className={`w-16 h-16 rounded-full ${randomColor()} 
+              flex items-center justify-center
+              hover:scale-105 hover:brightness-110 transition duration-200 ease-in-out cursor-pointer`}
+          >
+            <Icon />
+          </div>
+        );
+      })}
+    </div>
+  );
 
 export default function FilmDetail() {
     const { id } = useParams();
@@ -28,11 +79,12 @@ export default function FilmDetail() {
 
     if (loading || !film) return <div className="text-white p-10">Loading</div>;
 
-    const { title, director, producer, release_date, opening_crawl } = film.properties;
+    const { title, director, producer, release_date, opening_crawl, characters, planets, starships, species } =
+        film.properties;
 
     return (
 
-        <div className="min-h-screen bg-black text-white p-10 flex flex-col gap-8" style={{
+        <div className="min-h-screen z-10 bg-black text-white p-10 flex flex-col gap-8" style={{
             backgroundImage: `url(${detailsBg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -51,15 +103,28 @@ export default function FilmDetail() {
                     <p className="whitespace-pre-line text-sm leading-relaxed">{opening_crawl.replace(/\\r\\n/g, '\n')}</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 ml-15">
-                    <div className="bg-white/10 p-4 rounded">Characters</div>
-                    <div className="bg-white/10 p-4 rounded">Planets</div>
-                    <div className="bg-white/10 p-4 rounded">Species</div>
-                    <div className="bg-white/10 p-4 rounded">Starships</div>
+
+                <div className="z-20 grid grid-cols-2 gap-6 flex-1 ml-10">
+                    <div className="bg-white/10 p-4 rounded">
+                        <p className="mb-2 text-l font-semibold">Characters</p>
+                        <IconGrid items={characters} />
+                    </div>
+                    <div className="bg-white/10 p-4 rounded">
+                        <p className="mb-2 text-l font-semibold">Planets</p>
+                        <IconGrid items={planets} />
+                    </div>
+                    <div className="bg-white/10 p-4 rounded">
+                        <p className="mb-2 text-l font-semibold">Species</p>
+                        <IconGrid items={species} />
+                    </div>
+                    <div className="bg-white/10 p-4 rounded">
+                        <p className="mb-2 text-l font-semibold">Starships</p>
+                        <IconGrid items={starships} />
+                    </div>
                 </div>
 
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30" />
+            <div className="absolute z-0 inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30" />
         </div>
     );
 }
