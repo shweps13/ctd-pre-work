@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import filmsBg from '../assets/backgrounds/films.png';
 import shape1 from '../assets/visuals/1.svg';
 import shape2 from '../assets/visuals/2.svg';
@@ -32,6 +32,16 @@ export default function Films() {
             });
     }, []);
 
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const scrollLeft = () => {
+        scrollContainerRef.current?.scrollBy({ left: -400, behavior: 'smooth' });
+    };
+
+    const scrollRight = () => {
+        scrollContainerRef.current?.scrollBy({ left: 400, behavior: 'smooth' });
+    };
+
     return (
         <div
             className="relative w-full min-h-screen flex flex-col justify-center items-center text-white"
@@ -45,7 +55,7 @@ export default function Films() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div className="z-10 w-full overflow-x-auto pb-4 snap-x snap-mandatory flex gap-6 scroll-smooth overflow-hidden hide-scrollbar">
+                <div ref={scrollContainerRef} className="z-10 w-full overflow-x-auto pb-4 snap-x snap-mandatory flex gap-6 scroll-smooth overflow-hidden hide-scrollbar">
                     {films.map((film, index) => {
                         const year = new Date(film.properties.release_date).getFullYear();
                         const shape = shapes[index % shapes.length];
@@ -67,7 +77,11 @@ export default function Films() {
                 </div>
             )}
 
-            <p className="mt-15 text-sm opacity-40">← Scroll it →</p>
+            <div className="flex justify-center items-center gap-6 mt-8 z-10">
+                <button onClick={scrollLeft} className="text-2xl hover:opacity-80 transition cursor-pointer">←</button>
+                <p className="opacity-60">Scroll it</p>
+                <button onClick={scrollRight} className="text-2xl hover:opacity-80 transition cursor-pointer">→</button>
+            </div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30" />
         </div>
