@@ -17,6 +17,7 @@ Tech tasks:
 [] Lazy load ?
 [] Page redirection
 [] Content
+[] Upd load animation
 
 References:
 - Main ref: https://www.figma.com/community/file/1210654293667145015
