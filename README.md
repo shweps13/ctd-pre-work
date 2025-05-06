@@ -15,9 +15,10 @@ Tech tasks:
 [x] Cover scroll routing (react-scroll)
 [x] Handle 404 redirects
 [] Lazy load ?
-[] Page redirection
+[x] Page redirection
 [] Content
 [] Upd load animation
+[] Cover films ID overflow (404)
 
 References:
 - Main ref: https://www.figma.com/community/file/1210654293667145015

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/Home';
 import NotFound from './components/404';
+import FilmDetail from './components/FilmDetail';
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/films" element={<HomePage />} />
+        <Route path="/films/:id" element={<FilmDetail />} />
         <Route path="/characters" element={<HomePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

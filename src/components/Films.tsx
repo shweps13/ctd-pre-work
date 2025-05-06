@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import filmsBg from '../assets/backgrounds/films.png';
 import shape1 from '../assets/visuals/1.svg';
 import shape2 from '../assets/visuals/2.svg';
@@ -22,6 +23,8 @@ type Film = {
 export default function Films() {
     const [films, setFilms] = useState<Film[]>([]);
     const [loading, setLoading] = useState(true);
+    
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('https://www.swapi.tech/api/films')
@@ -63,7 +66,8 @@ export default function Films() {
                         return (
                             <div
                                 key={film.uid}
-                                className={`min-w-[400px] snap-center bg-black bg-opacity-50 rounded-lg p-6 flex flex-row items-center text-center ${index === 0 ? 'ml-[200px]' : ''} ${index === films.length - 1 ? 'mr-[200px]' : ''}`}
+                                onClick={() => navigate(`/films/${film.uid}`)}
+                                className={`min-w-[400px] snap-center bg-black bg-opacity-50 rounded-lg p-6 flex flex-row items-center text-center cursor-pointer ${index === 0 ? 'ml-[200px]' : ''} ${index === films.length - 1 ? 'mr-[200px]' : ''}`}
                             >
                                 <img src={shape} alt={`shape-${index}`} className="w-40 h-50 mb-4" />
                                 <div className='flex flex-col ml-10'>
