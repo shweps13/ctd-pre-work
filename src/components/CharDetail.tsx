@@ -93,10 +93,10 @@ export default function CharDetail() {
                         <strong >Hair:</strong> {hair_color} <br />
                         <strong>Skin:</strong> {skin_color} <br />
                         <strong>Eyes:</strong> {eye_color} <br />
-                        <div className="cursor-pointer" onClick={() => navigate(`/planets/${homeworldId}`)}>
-                            <strong>Homeworld:</strong> [Visit]
-                        </div>
                     </p>
+                    <div className="cursor-pointer" onClick={() => navigate(`/planets/${homeworldId}`)}>
+                        <p><strong>Homeworld:</strong> [Visit]</p>
+                    </div>
                 </div>
                 {imageUrl ?
                     <img

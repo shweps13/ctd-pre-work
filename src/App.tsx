@@ -9,9 +9,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/films" element={<HomePage />} />
         <Route path="/films/:id" element={<FilmDetail />} />
-        <Route path="/characters" element={<HomePage />} />
         <Route path="/characters/:id" element={<CharDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
