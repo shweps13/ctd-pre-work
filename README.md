@@ -23,4 +23,5 @@ Tech tasks:
 References:
 - Main ref: https://www.figma.com/community/file/1210654293667145015
 - Backgrounds: https://www.behance.net/RPJUN
+- Additional Characters IPI: https://akabab.github.io/starwars-api/
 - 404: https://www.figma.com/community/file/1154693418409191716/404-pages-star-wars-style

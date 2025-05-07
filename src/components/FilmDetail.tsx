@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import detailsBg from '../assets/backgrounds/details.png';
 import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
 import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
@@ -43,25 +43,38 @@ const icons = [
     GiPlanetConquest,
     GiAlienSkull,
     GiSpaceShuttle,
-  ];
+];
 
-const IconGrid = ({ items }: { items: string[] }) => (
-    <div className="flex flex-wrap gap-4 mt-4">
-      {items.slice(0, 20).map((_, i) => {
-        const Icon = icons[Math.floor(Math.random() * icons.length)];
-        return (
-          <div
-            key={i}
-            className={`w-16 h-16 rounded-full ${randomColor()} 
-              flex items-center justify-center
-              hover:scale-105 hover:brightness-110 transition duration-200 ease-in-out cursor-pointer`}
-          >
-            <Icon />
-          </div>
-        );
-      })}
-    </div>
-  );
+const IconGrid = ({ items, routePrefix, }: {
+    items: string[];
+    routePrefix: 'characters' | 'planets' | 'species' | 'starships' | 'vehicles';
+}) => {
+    const navigate = useNavigate();
+
+    const extractId = (url: string) => url?.split('/').filter(Boolean).pop();
+
+    return (
+        <div className="flex flex-wrap gap-4 mt-4">
+            {items.map((url, i) => {
+                const Icon = icons[Math.floor(Math.random() * icons.length)];
+                const id = extractId(url);
+
+                return (
+                    <div
+                        key={i}
+                        onClick={() => navigate(`/${routePrefix}/${id}`)}
+                        className={`w-16 h-16 rounded-full ${randomColor()} 
+                flex items-center justify-center text-white text-xl
+                hover:scale-105 hover:brightness-110 transition duration-200 ease-in-out cursor-pointer`}
+                        title={`Go to ${routePrefix} ${id}`}
+                    >
+                        <Icon />
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
 
 export default function FilmDetail() {
     const { id } = useParams();
@@ -107,19 +120,19 @@ export default function FilmDetail() {
                 <div className="z-20 grid grid-cols-2 gap-6 flex-1 ml-10">
                     <div className="bg-white/10 p-4 rounded">
                         <p className="mb-2 text-l font-semibold">Characters</p>
-                        <IconGrid items={characters} />
+                        <IconGrid items={characters} routePrefix="characters" />
                     </div>
                     <div className="bg-white/10 p-4 rounded">
                         <p className="mb-2 text-l font-semibold">Planets</p>
-                        <IconGrid items={planets} />
+                        <IconGrid items={planets} routePrefix="planets" />
                     </div>
                     <div className="bg-white/10 p-4 rounded">
                         <p className="mb-2 text-l font-semibold">Species</p>
-                        <IconGrid items={species} />
+                        <IconGrid items={species} routePrefix="species" />
                     </div>
                     <div className="bg-white/10 p-4 rounded">
                         <p className="mb-2 text-l font-semibold">Starships</p>
-                        <IconGrid items={starships} />
+                        <IconGrid items={starships} routePrefix="starships" />
                     </div>
                 </div>
 

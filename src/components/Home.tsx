@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Landing from '../components/Landing';
 import Films from '../components/Films';
 import Characters from '../components/Characters';
+import Footer from '../components/Footer';
 
 export default function HomePage() {
     const filmsRef = useRef<HTMLDivElement>(null);
@@ -36,6 +37,9 @@ export default function HomePage() {
 
             <div ref={charactersRef} className="min-h-screen w-full bg-black">
                 <Characters />
+            </div>
+            <div className="min-h-screen w-full bg-black">
+                <Footer />
             </div>
         </div>
     );

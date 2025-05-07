@@ -5,6 +5,7 @@ import visual2 from '../assets/visuals/102.png';
 import visual3 from '../assets/visuals/103.png';
 import visual4 from '../assets/visuals/104.png';
 import visual5 from '../assets/visuals/105.png';
+import { useNavigate } from 'react-router-dom';
 
 type Character = {
     uid: string;
@@ -25,6 +26,8 @@ export default function Characters() {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState<number | null>(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -51,7 +54,9 @@ export default function Characters() {
                 <>
                     <div className="z-10 grid grid-cols-4 gap-7 pt-10">
                         {characters.map((char) => (
-                            <div key={char.uid} className="bg-black/60 rounded-lg p-5 hover:bg-black/100 transition cursor-pointer flex justify-center flex-col text-center">
+                            <div key={char.uid} className="bg-black/60 rounded-lg p-5 hover:bg-black/100 transition cursor-pointer flex justify-center flex-col text-center"
+                            onClick={() => navigate(`/characters/${char.uid}`)}
+                            >
                                 <img className="w-full max-h-50 object-contain mb-2" src={vusials[Math.floor(Math.random() * vusials.length)]} alt="character's graph" />
                                 <h2 className="text-xl font-semibold">{char.name}</h2>
                             </div>
