@@ -7,11 +7,16 @@ type Entity = {
     name: string;
 };
 
-const categories = ['species', 'planets', 'starships', 'vehicles'] as const;
-type Category = (typeof categories)[number];
+type Category = 'species' | 'planets' | 'starships' | 'vehicles';
 
-export default function EntityBrowser() {
-    const [selectedCategory, setSelectedCategory] = useState<Category>('species');
+interface EntityProps {
+  selectedCategory: Category;
+  setSelectedCategory: (category: Category) => void;
+}
+
+export default function EntityBrowser({selectedCategory, setSelectedCategory}: EntityProps) {
+
+    // const [selectedCategory, setSelectedCategory] = useState<Category>('species');
     const [page, setPage] = useState(1);
     const [data, setData] = useState<Entity[]>([]);
     const [totalPages, setTotalPages] = useState<number | null>(null);

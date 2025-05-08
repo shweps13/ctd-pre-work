@@ -10,17 +10,17 @@ import mainBg from '../assets/backgrounds/main.jpg';
 interface LandingProps {
     onSelectFilms: () => void;
     onSelectCharacters: () => void;
-    onSelectSpecies: () => void;
-}
+    onSelectSpecies: (category: 'species' | 'planets' | 'starships' | 'vehicles') => void;
+  }
 
 export default function Landing({ onSelectFilms, onSelectCharacters, onSelectSpecies }: LandingProps) {
     const menuItems = [
         { icon: filmIcon, label: 'FILMS', action: onSelectFilms },
-        { icon: charactersIcon, label: 'CHARACTERS', action: onSelectCharacters},
-        { icon: speciesIcon, label: 'SPECIES', action: onSelectSpecies },
-        { icon: planetsIcon, label: 'PLANETS', action: onSelectSpecies },
-        { icon: starshipsIcon, label: 'STARSHIPS', action: onSelectSpecies },
-        { icon: vehiclesIcon, label: 'VEHICLES', action: onSelectSpecies },
+        { icon: charactersIcon, label: 'CHARACTERS', action: onSelectCharacters },
+        { icon: speciesIcon, label: 'SPECIES', action: () => onSelectSpecies('species') },
+        { icon: planetsIcon, label: 'PLANETS', action: () => onSelectSpecies('planets') },
+        { icon: starshipsIcon, label: 'STARSHIPS', action: () => onSelectSpecies('starships') },
+        { icon: vehiclesIcon, label: 'VEHICLES', action: () => onSelectSpecies('vehicles') },
     ];
     return (
         <div

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import Landing from './Landing';
 import Films from './Films';
 import Characters from './Characters';
@@ -9,14 +9,18 @@ export default function HomePage() {
     const filmsRef = useRef<HTMLDivElement>(null);
     const charactersRef = useRef<HTMLDivElement>(null);
     const speciesRef = useRef<HTMLDivElement>(null);
+    type Category = 'species' | 'planets' | 'starships' | 'vehicles';
+    const [selectedCategory, setSelectedCategory] = useState<Category>('species');
 
-    const scrollToSection = (section: string) => {
+    const scrollToSection = (section: string, category?: string) => {
         const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {
             '/films': filmsRef,
             '/characters': charactersRef,
             '/species': speciesRef,
         };
-
+        if (category) {
+            setSelectedCategory(category);
+        }
         const targetRef = refs[section];
         targetRef?.current?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -27,7 +31,7 @@ export default function HomePage() {
             <Landing
                 onSelectFilms={() => scrollToSection('/films')}
                 onSelectCharacters={() => scrollToSection('/characters')}
-                onSelectSpecies={() => scrollToSection('/species')}
+                onSelectSpecies={(category) => scrollToSection('/species', category)}
             />
 
             <div ref={filmsRef} className="min-h-screen w-full bg-black">
@@ -39,11 +43,11 @@ export default function HomePage() {
             </div>
 
             <div ref={speciesRef} className="min-h-screen w-full bg-black">
-                <Species />
+                <Species selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
             </div>
 
             <div className="min-h-screen w-full bg-black">
-                <Footer />
+                <Footer/>
             </div>
         </div>
     );
