@@ -12,7 +12,7 @@ export default function HomePage() {
     type Category = 'species' | 'planets' | 'starships' | 'vehicles';
     const [selectedCategory, setSelectedCategory] = useState<Category>('species');
 
-    const scrollToSection = (section: string, category?: string) => {
+    const scrollToSection = (section: string, category?: Category) => {
         const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {
             '/films': filmsRef,
             '/characters': charactersRef,

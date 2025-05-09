@@ -15,7 +15,7 @@ interface EntityProps {
 }
 
 export default function EntityBrowser({selectedCategory, setSelectedCategory}: EntityProps) {
-
+    const categories: Category[] = ['species', 'planets', 'starships', 'vehicles'];
     // const [selectedCategory, setSelectedCategory] = useState<Category>('species');
     const [page, setPage] = useState(1);
     const [data, setData] = useState<Entity[]>([]);
@@ -70,7 +70,7 @@ export default function EntityBrowser({selectedCategory, setSelectedCategory}: E
                     <p className="z-10">Loading</p>
                 ) : (
                     <>
-                        <div className="z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+                        <div className="z-10 grid grid-cols-3 gap-6 max-w-6xl">
                             {data.map((item) => (
                                 <div
                                     key={item.uid}
