@@ -21,6 +21,7 @@ Tech tasks:
 [x] Cover films ID overflow (404)
 [] Cover all redirects between data units
 [] Basic responsiveness
+[] Upd icon + info
 
 References:
 - Main ref: https://www.figma.com/community/file/1210654293667145015

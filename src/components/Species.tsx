@@ -16,7 +16,6 @@ interface EntityProps {
 
 export default function EntityBrowser({selectedCategory, setSelectedCategory}: EntityProps) {
     const categories: Category[] = ['species', 'planets', 'starships', 'vehicles'];
-    // const [selectedCategory, setSelectedCategory] = useState<Category>('species');
     const [page, setPage] = useState(1);
     const [data, setData] = useState<Entity[]>([]);
     const [totalPages, setTotalPages] = useState<number | null>(null);
