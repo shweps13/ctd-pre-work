@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import charBg from '../assets/backgrounds/char.png';
-import imgPlaceholder from '../assets/visuals/101.png';
+import charBg from '../../assets/backgrounds/char.png';
+import imgPlaceholder from '../../assets/visuals/101.png';
 
 type CharacterData = {
     properties: {

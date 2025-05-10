@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import detailsBg from '../assets/backgrounds/details.png';
+import detailsBg from '../../assets/backgrounds/details.png';
 import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
 import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
 
-type SpeciesProps = {
+type StarshipProps = {
     name: string;
-    classification: string;
-    designation: string;
-    average_height: string;
-    average_lifespan: string;
-    hair_colors: string;
-    skin_colors: string;
-    eye_colors: string;
-    language: string;
-    homeworld: string;
-    people: string[];
+    model: string;
+    starship_class: string;
+    manufacturer: string;
+    cost_in_credits: string;
+    length: string;
+    crew: string;
+    passengers: string;
+    max_atmosphering_speed: string;
+    hyperdrive_rating: string;
+    MGLT: string;
+    cargo_capacity: string;
+    consumables: string;
+    films: string[];
 };
 
 const randomColor = () => {
@@ -46,7 +49,7 @@ const icons = [
 
 const IconGrid = ({ items, routePrefix, }: {
     items: string[];
-    routePrefix: 'characters' | 'planets' | 'species' | 'starships' | 'vehicles';
+    routePrefix: 'characters' | 'planets' | 'species' | 'starships' | 'vehicles' | 'films';
 }) => {
     const navigate = useNavigate();
 
@@ -77,15 +80,13 @@ const IconGrid = ({ items, routePrefix, }: {
 
 
 
-export default function SpeciesDetail() {
+export default function StarshipDetail() {
     const { id } = useParams();
-    const [data, setData] = useState<SpeciesProps | null>(null);
+    const [data, setData] = useState<StarshipProps | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
-        fetch(`https://www.swapi.tech/api/species/${id}`)
+        fetch(`https://www.swapi.tech/api/starships/${id}`)
             .then((res) => res.json())
             .then((json) => {
                 setData(json.result.properties);
@@ -95,24 +96,27 @@ export default function SpeciesDetail() {
 
     if (loading || !data)
         return (
-            <div className="min-h-screen flex justify-center items-center text-yellow-400 bg-black">Loading...</div>
+            <div className="min-h-screen flex justify-center items-center text-yellow-400 bg-black">
+                Loading
+            </div>
         );
 
     const {
         name,
-        classification,
-        designation,
-        average_height,
-        average_lifespan,
-        hair_colors,
-        skin_colors,
-        eye_colors,
-        language,
-        homeworld,
-        people,
+        model,
+        starship_class,
+        manufacturer,
+        cost_in_credits,
+        length,
+        crew,
+        passengers,
+        max_atmosphering_speed,
+        hyperdrive_rating,
+        MGLT,
+        cargo_capacity,
+        consumables,
+        films,
     } = data;
-
-    const homeworldId = homeworld.split('/').pop();
 
     return (
         <div
@@ -124,37 +128,44 @@ export default function SpeciesDetail() {
             }}
         >
             <div className="absolute z-0 inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30" />
+
             <div className="flex justify-between">
                 <h1 className="text-4xl font-bold uppercase">{name}</h1>
                 <div className="flex flex-wrap gap-6 text-sm opacity-80">
-                    <div className="flex flex-col text-xl font-bold"><span className="text-sm">Classification:</span> {classification}</div>
-                    <div className="flex flex-col text-xl font-bold"><span className="text-sm">Designation:</span> {designation}</div>
-                    <div className="flex flex-col text-xl font-bold"><span className="text-sm">Language:</span> {language}</div>
+                    <div className="flex flex-col text-xl font-bold">
+                        <span className="text-sm">Model:</span> {model}
+                    </div>
+                    <div className="flex flex-col text-xl font-bold">
+                        <span className="text-sm">Class:</span> {starship_class}
+                    </div>
+                    <div className="flex flex-col text-xl font-bold">
+                        <span className="text-sm">Manufacturer:</span> {manufacturer}
+                    </div>
                 </div>
             </div>
 
             <div className="z-10 flex flex-row gap-10">
                 <div className="bg-white/10 p-6 rounded-lg w-full max-w-md">
                     <p className="text-sm leading-relaxed">
-                        <strong>Height:</strong> {average_height} cm<br />
-                        <strong>Lifespan:</strong> {average_lifespan} years<br />
-                        <strong>Hair:</strong> {hair_colors}<br />
-                        <strong>Skin:</strong> {skin_colors}<br />
-                        <strong>Eyes:</strong> {eye_colors}<br />
-                        <div className="cursor-pointer" onClick={() => navigate(`/planets/${homeworldId}`)}>
-                            <p><strong>Homeworld:</strong> [Visit]</p>
-                        </div>
+                        <strong>Cost:</strong> {cost_in_credits} credits<br />
+                        <strong>Length:</strong> {length} meters<br />
+                        <strong>Crew:</strong> {crew}<br />
+                        <strong>Passengers:</strong> {passengers}<br />
+                        <strong>Speed:</strong> {max_atmosphering_speed} km/h<br />
+                        <strong>Hyperdrive Rating:</strong> {hyperdrive_rating}<br />
+                        <strong>MGLT:</strong> {MGLT}<br />
+                        <strong>Cargo:</strong> {cargo_capacity}<br />
+                        <strong>Consumables:</strong> {consumables}
                     </p>
                 </div>
 
                 <div className="z-10 grid grid-cols-1 gap-6 flex-1">
                     <div className="bg-white/10 p-4 rounded">
-                        <p className="mb-2 text-l font-semibold">Characters</p>
-                        <IconGrid items={people} routePrefix="characters" />
+                        <p className="mb-2 text-l font-semibold">Films</p>
+                        <IconGrid items={films} routePrefix="films" />
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

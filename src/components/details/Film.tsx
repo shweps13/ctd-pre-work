@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import detailsBg from '../assets/backgrounds/details.png';
+import detailsBg from '../../assets/backgrounds/details.png';
 import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
 import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
 
