@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import CharsBg from '../assets/backgrounds/species.jpg';
 import { useNavigate } from 'react-router-dom';
+import { MoonLoader } from 'react-spinners';
 
 type Entity = {
     uid: string;
@@ -10,11 +11,11 @@ type Entity = {
 type Category = 'species' | 'planets' | 'starships' | 'vehicles';
 
 interface EntityProps {
-  selectedCategory: Category;
-  setSelectedCategory: (category: Category) => void;
+    selectedCategory: Category;
+    setSelectedCategory: (category: Category) => void;
 }
 
-export default function EntityBrowser({selectedCategory, setSelectedCategory}: EntityProps) {
+export default function EntityBrowser({ selectedCategory, setSelectedCategory }: EntityProps) {
     const categories: Category[] = ['species', 'planets', 'starships', 'vehicles'];
     const [page, setPage] = useState(1);
     const [data, setData] = useState<Entity[]>([]);
@@ -66,7 +67,7 @@ export default function EntityBrowser({selectedCategory, setSelectedCategory}: E
             <div className="flex-1 flex flex-col justify-center items-center z-10">
 
                 {loading ? (
-                    <p className="z-10">Loading</p>
+                    <MoonLoader color="#FFEEFF" loading={loading} size={75} aria-label="Loading Spinner" />
                 ) : (
                     <>
                         <div className="z-10 grid grid-cols-3 gap-6 max-w-6xl">
@@ -82,25 +83,26 @@ export default function EntityBrowser({selectedCategory, setSelectedCategory}: E
                             ))}
                         </div>
 
-                        <div className="flex justify-center items-center gap-6 mt-10">
-                            <button
-                                onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                                disabled={page === 1}
-                                className="z-10 px-4 py-2 text-2xl hover:opacity-80 transition disabled:opacity-30 cursor-pointer"
-                            >
-                                ←
-                            </button>
+                        {!loading ?
+                            <div className="flex justify-center items-center gap-6 mt-10">
+                                <button
+                                    onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                                    disabled={page === 1}
+                                    className="z-10 px-4 py-2 text-2xl hover:opacity-80 transition disabled:opacity-30 cursor-pointer"
+                                >
+                                    ←
+                                </button>
 
-                            <span className="text-sm opacity-60">{page}{totalPages ? ` / ${totalPages}` : ''}</span>
+                                <span className="text-sm opacity-60">{page}{totalPages ? ` / ${totalPages}` : ''}</span>
 
-                            <button
-                                onClick={() => setPage((p) => (totalPages ? Math.min(p + 1, totalPages) : p + 1))}
-                                disabled={totalPages !== null && page >= totalPages}
-                                className="z-10 px-4 py-2 text-2xl hover:opacity-80 transition disabled:opacity-30 cursor-pointer"
-                            >
-                                →
-                            </button>
-                        </div>
+                                <button
+                                    onClick={() => setPage((p) => (totalPages ? Math.min(p + 1, totalPages) : p + 1))}
+                                    disabled={totalPages !== null && page >= totalPages}
+                                    className="z-10 px-4 py-2 text-2xl hover:opacity-80 transition disabled:opacity-30 cursor-pointer"
+                                >
+                                    →
+                                </button>
+                            </div> : <></>}
                     </>
                 )}
             </div>

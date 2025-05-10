@@ -7,6 +7,7 @@ import shape3 from '../assets/visuals/3.svg';
 import shape4 from '../assets/visuals/4.svg';
 import shape5 from '../assets/visuals/5.svg';
 import shape6 from '../assets/visuals/6.svg';
+import { MoonLoader } from 'react-spinners';
 
 const shapes = [shape1, shape2, shape3, shape4, shape5, shape6];
 
@@ -23,7 +24,7 @@ type Film = {
 export default function Films() {
     const [films, setFilms] = useState<Film[]>([]);
     const [loading, setLoading] = useState(true);
-    
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,7 +57,7 @@ export default function Films() {
         >
 
             {loading ? (
-                <p>Loading...</p>
+                <MoonLoader color="#FFEEFF" loading={loading} size={75} aria-label="Loading Spinner" />
             ) : (
                 <div ref={scrollContainerRef} className="z-10 w-full overflow-x-auto pb-4 snap-x snap-mandatory flex gap-6 scroll-smooth overflow-hidden hide-scrollbar">
                     {films.map((film, index) => {
@@ -81,11 +82,12 @@ export default function Films() {
                 </div>
             )}
 
-            <div className="flex justify-center items-center gap-6 mt-8 z-10">
-                <button onClick={scrollLeft} className="text-2xl hover:opacity-80 transition cursor-pointer">←</button>
-                <p className="opacity-60">Scroll it</p>
-                <button onClick={scrollRight} className="text-2xl hover:opacity-80 transition cursor-pointer">→</button>
-            </div>
+            {!loading ?
+                <div className="flex justify-center items-center gap-6 mt-8 z-10">
+                    <button onClick={scrollLeft} className="text-2xl hover:opacity-80 transition cursor-pointer">←</button>
+                    <p className="opacity-60">Scroll it</p>
+                    <button onClick={scrollRight} className="text-2xl hover:opacity-80 transition cursor-pointer">→</button>
+                </div> : <></>}
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-30" />
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import detailsBg from '../../assets/backgrounds/details.png';
+import { MoonLoader } from 'react-spinners';
 
 type PlanetProps = {
     name: string;
@@ -32,7 +33,9 @@ export default function PlanetDetail() {
 
     if (loading || !data)
         return (
-            <div className="min-h-screen flex justify-center items-center text-yellow-400 bg-black">Loading</div>
+            <div className='min-h-screen flex justify-center items-center bg-gray-900'>
+                <MoonLoader color="#FFEE58" loading={loading} size={100} aria-label="Loading Spinner" />
+            </div>
         );
 
     const {

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import detailsBg from '../../assets/backgrounds/details.png';
 import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
 import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
+import { MoonLoader } from 'react-spinners';
 
 type StarshipProps = {
     name: string;
@@ -96,8 +97,8 @@ export default function StarshipDetail() {
 
     if (loading || !data)
         return (
-            <div className="min-h-screen flex justify-center items-center text-yellow-400 bg-black">
-                Loading
+            <div className='min-h-screen flex justify-center items-center bg-gray-900'>
+                <MoonLoader color="#FFEE58" loading={loading} size={100} aria-label="Loading Spinner" />
             </div>
         );
 

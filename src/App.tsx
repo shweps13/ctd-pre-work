@@ -3,10 +3,10 @@ import HomePage from './components/Home';
 import NotFound from './components/404';
 import FilmDetail from './components/details/Film';
 import CharDetail from './components/details/Character';
-import SpeciesDetail from './components/details/SpeciesDetail';
-import PlanetDetail from './components/details/PlanetDetail';
-import StarshipDetail from './components/details/StarshipDetail';
-import VehicleDetail from './components/details/VehicleDetail';
+import SpeciesDetail from './components/details/Species';
+import PlanetDetail from './components/details/Planet';
+import StarshipDetail from './components/details/Starship';
+import VehicleDetail from './components/details/Vehicle';
 
 export default function App() {
   return (

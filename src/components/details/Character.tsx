@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { MoonLoader } from "react-spinners";
 import charBg from '../../assets/backgrounds/char.png';
 import imgPlaceholder from '../../assets/visuals/101.png';
+
+
 
 type CharacterData = {
     properties: {
@@ -18,6 +21,7 @@ type CharacterData = {
         vehicles: string[];
     };
 };
+
 
 
 export default function CharDetail() {
@@ -42,7 +46,9 @@ export default function CharDetail() {
             });
     }, [id]);
 
-    if (loading || !char) return <div className="text-white p-10">Loading</div>;
+    if (loading || !char) return <div className='min-h-screen flex justify-center items-center bg-gray-900'>
+        <MoonLoader color="#FFEE58" loading={loading} size={100} aria-label="Loading Spinner" />
+    </div>
 
     const {
         name,

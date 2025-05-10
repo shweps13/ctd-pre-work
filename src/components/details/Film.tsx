@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import detailsBg from '../../assets/backgrounds/details.png';
 import { FaJediOrder, FaRobot, FaMeteor, FaRocket, FaDragon } from 'react-icons/fa';
 import { GiPlanetConquest, GiAlienSkull, GiSpaceShuttle } from 'react-icons/gi';
+import { MoonLoader } from 'react-spinners';
 
 type FilmDetailData = {
     properties: {
@@ -90,7 +91,9 @@ export default function FilmDetail() {
             });
     }, [id]);
 
-    if (loading || !film) return <div className="text-white p-10">Loading</div>;
+    if (loading || !film) return <div className='min-h-screen flex justify-center items-center bg-gray-900'>
+        <MoonLoader color="#FFEE58" loading={loading} size={100} aria-label="Loading Spinner" />
+    </div>
 
     const { title, director, producer, release_date, opening_crawl, characters, planets, starships, species } =
         film.properties;
