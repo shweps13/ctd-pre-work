@@ -4,7 +4,7 @@ import speciesIcon from '../assets/menu/species.svg';
 import planetsIcon from '../assets/menu/planets.svg';
 import starshipsIcon from '../assets/menu/starships.svg';
 import vehiclesIcon from '../assets/menu/vehicles.svg';
-import logo from '../assets/logo.svg';
+import logo from '../assets/Logo.svg';
 import mainBg from '../assets/backgrounds/main.jpg';
 
 interface LandingProps {

@@ -16,9 +16,11 @@ Tech tasks:
 [x] Handle 404 redirects
 [] Lazy load ?
 [x] Page redirection
-[] Content
+[x] Content
 [] Upd load animation
-[] Cover films ID overflow (404)
+[x] Cover films ID overflow (404)
+[] Cover all redirects between data units
+[] Basic responsiveness
 
 References:
 - Main ref: https://www.figma.com/community/file/1210654293667145015
